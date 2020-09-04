@@ -115,14 +115,12 @@
 
             contJugadas.style.display = 'flex'
 
-            // playGame.addEventListener("click", (e)=>{
-            //     e.preventDefault()
+            playGame.addEventListener("click", (e)=>{
+                e.preventDefault()
 
-            //     contJugadas.style.display = 'none'
-            // })
-
-            
-
+                contador = 0
+                cajaCont.innerHTML = contador
+            })
 
             //MOSTRANDO LA OPCION SELECCIONADA POR EL USUARIO
             let player = seleccionUsuario(e)
