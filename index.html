@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&family=Raleway&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="tablero">
+            <div class="logo">
+                <img src="./images/logo.svg" alt="">
+            </div>
+
+            <div class="score">
+                <h4>
+                    <small>SCORE</small>
+                    <p class="caja-cont">0</p>
+                </h4>
+            </div>
+        </div>
+
+        <div class="opciones">
+            <div>
+                <div class="papel">
+                    <div class="image img-papel">
+                        <img src="./images/icon-paper.svg" class="o-papel" alt="">
+                    </div>
+                </div>
+
+                <div class="tijera">
+                    <div class="image img-tijera">
+                        <img src="./images/icon-scissors.svg" class="o-tijera" alt="">
+                    </div>
+                </div>
+
+                <div class="piedra">
+                    <div class="image img-piedra">
+                        <img src="./images/icon-rock.svg" class="o-piedra" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="reglas">
+            <a href="" class="btn-reglas">Rules</a>
+        </div>
+
+        <div class="jugadas">
+            <div class="image player">
+                <img src="" alt="">
+            </div>
+
+            <div class="resultado">
+                <p>YOU WIN</p>
+                <a href="" class="btn-reglas play">Play again</a>
+            </div>
+
+            <div class="image cpu"></div>
+        </div>
+        
+    </div>
+
+
+    <script>
+        const playGame = document.querySelector(".play")
+
+        const contJugadas = document.querySelector(".jugadas")
+
+        const contOpciones = document.querySelector(".opciones")
+        
+
+        const cajaCont = document.querySelector(".caja-cont")
+
+        const imgJugada = document.querySelector(".player img")
+        const contJugada = document.querySelector(".player")
+
+        const resultado = document.querySelector(".resultado p")
+
+        const contCpu = document.querySelector(".cpu")
+
+        const reglas = document.querySelector(".btn-reglas")
+        const opciones = document.querySelector(".opciones")
+
+        let contador = 0
+
+        reglas.addEventListener('click', (e)=>{
+            e.preventDefault()
+
+            
+
+            Swal.fire({
+            title: '<strong>RULES</strong>', 
+            html:
+                `<img src="./images/image-rules.svg" alt="">` ,
+            showCloseButton: true, 
+            focusConfirm: false,
+            confirmButtonText:
+                '<i class="fa fa-thumbs-up"></i> Entendido!' 
+            })
+        })
+        
+        opciones.addEventListener('click', (e)=>{
+            //0 = PIEDRA
+            //1 = PAPEL
+            //2 = TIJERA
+
+            contJugadas.style.display = 'flex'
+            contOpciones.style.display = 'none'
+
+            playGame.addEventListener("click", (e)=>{
+                e.preventDefault()
+                contOpciones.style.display = 'grid' 
+                contJugadas.style.display = 'none'
+            })
+
+            let cpu = Math.floor(Math.random() * 3) 
+
+            let player 
+
+            const valores = ["piedra", "papel", "tijera"]
+
+
+            if (e.target.classList[0] == "o-piedra") {
+                player = 0
+                imgJugada.setAttribute("src", "./images/icon-rock.svg")
+                contJugada.style.boxShadow = '0px 0px 2px 10px #e0566f'
+
+            }else if(e.target.classList[0] == "o-papel"){
+                player = 1
+                imgJugada.setAttribute("src", "./images/icon-paper.svg")
+                contJugada.style.boxShadow = '0px 0px 2px 10px #3886ca'
+
+            }else{
+                player = 2
+                imgJugada.setAttribute("src", "./images/icon-scissors.svg")
+                contJugada.style.boxShadow = '0px 0px 2px 10px #f5b05c'
+            }
+
+            if (cpu == 0) {
+                contCpu.style.backgroundImage = 'url(./images/icon-rock.svg)'
+            }else if(cpu == 1){
+                contCpu.style.backgroundImage = 'url(./images/icon-paper.svg)'
+            }else{
+                contCpu.style.backgroundImage = 'url(./images/icon-scissors.svg)'
+            }
+            
+
+            if (valores[cpu] == "piedra" && valores[player] == "tijera" ||
+                valores[cpu] == "tijera" && valores[player] == "papel" ||
+                valores[cpu] == "papel" && valores[player] == "piedra")  {
+
+                console.log("EL usuario pierde")
+                resultado.innerHTML = "You lose"
+
+            }else if(cpu == player){
+
+                console.log("Hubo un empate")
+                resultado.innerHTML = "none"
+
+            }else{
+
+                console.log("EL usuario gana")
+                resultado.innerHTML = "You win"
+                contador++
+                cajaCont.innerHTML = contador
+            }
+ 
+            console.log("CPU",cpu)
+            console.log("PLAYER",player)
+        })
+
+               
+    </script>
+</body>
+</html>

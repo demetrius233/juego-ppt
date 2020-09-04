@@ -1,0 +1,187 @@
+html{
+    box-sizing: border-box;
+}
+body{
+    background-color: #0c2738;
+    margin: 0;
+    box-sizing: inherit;
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Raleway', sans-serif;
+}
+
+ 
+
+/* GLOBAL */
+img{
+    max-width: 100%;
+}
+.btn-reglas{
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid;
+    border-radius: 6px;
+    padding: .35rem 1.5rem;
+    display: inline-block;
+    text-transform: uppercase;
+    transition:  .3s;
+}
+.btn-reglas:hover{
+    background-color: #fff;
+    color: black;
+}
+.container{
+    margin: auto;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 1px solid #f2f2f2;  */
+    padding: 1rem;
+}
+@media (min-width: 480px){
+    .container{
+        width: 75%;
+    }
+}
+
+/* TABLERO */
+.tablero{
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    box-shadow: 0 0 2px 2px #828282;
+    border-radius: 4px; 
+}
+.score{
+    justify-self: end;
+    text-align: center;
+    padding: .5rem 2rem;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+}
+.score h4{
+    margin: auto;
+}
+
+.score h4 p{
+    font-size: 3rem;
+    margin: 0;
+    color: #a09e9a;
+}
+
+.score h4 small{
+    color: #3271d0;
+}
+
+/* OPCIONES */
+.opciones{
+    display: grid;
+    grid-template-columns: 300px;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.opciones > div{ 
+    background-image: url(../images/bg-triangle.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "papel tijera"
+                         "piedra piedra";
+}
+
+/* image */
+.image{ 
+    background-color: #f2f2f2;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.img-papel{
+    box-shadow: 0 0 2px 10px #3886ca;
+    grid-area: papel;
+    margin-left: -25px;
+}
+
+.piedra{
+    grid-area: piedra;
+    justify-self: center;
+    align-self: flex-end;
+}
+
+.img-piedra{
+    box-shadow: 0 0 2px 10px #e0566f;
+    
+}
+
+.tijera{
+    justify-self: end;
+    grid-area: tijera;
+}
+
+.img-tijera{
+    box-shadow: 0 0 2px 10px #f5b05c;
+    margin-right: -25px;
+}
+
+/* REGLAS */
+.reglas{
+    text-align: right;
+}
+
+.cpu{
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/icon-paper.svg);
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    /* animation: fondos 1.2s infinite linear; */
+}
+.cpu-active{
+
+}
+.cpu-stop{
+    animation-play-state: paused;
+}
+@keyframes fondos{
+    33%{background-image: url(../images/icon-rock.svg);}
+    66%{background-image: url(../images/icon-scissors.svg);}
+    99%{background-image: url(../images/icon-paper.svg);}
+}
+
+
+/* JUGADAS */
+.jugadas{ 
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+    display: none;
+}
+
+ 
+
+ 
+
+.jugadas .cpu{
+    background-color: #1d2d46;
+    /* background-image: url(../images/icon-rock.svg); */
+}
+
+/* RESULTADO */
+.resultado{
+    text-align: center;
+}
+.resultado p{
+    color: #fff;
+    text-transform: uppercase;
+}
