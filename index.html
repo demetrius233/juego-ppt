@@ -59,7 +59,7 @@
 
             <div class="resultado">
                 <p>YOU WIN</p>
-                <a href="" class="btn-reglas play">Play again</a>
+                <a href="" class="btn-reglas play">Reset</a>
             </div>
 
             <div class="image cpu"></div>
@@ -90,10 +90,9 @@
 
         let contador = 0
 
+        //MOSTRAR REGLAS
         reglas.addEventListener('click', (e)=>{
             e.preventDefault()
-
-            
 
             Swal.fire({
             title: '<strong>RULES</strong>', 
@@ -110,23 +109,35 @@
             //0 = PIEDRA
             //1 = PAPEL
             //2 = TIJERA
-
-            contJugadas.style.display = 'flex'
-            contOpciones.style.display = 'none'
-
-            playGame.addEventListener("click", (e)=>{
-                e.preventDefault()
-                contOpciones.style.display = 'grid' 
-                contJugadas.style.display = 'none'
-            })
-
             let cpu = Math.floor(Math.random() * 3) 
-
-            let player 
 
             const valores = ["piedra", "papel", "tijera"]
 
+            contJugadas.style.display = 'flex'
 
+            // playGame.addEventListener("click", (e)=>{
+            //     e.preventDefault()
+
+            //     contJugadas.style.display = 'none'
+            // })
+
+            
+
+
+            //MOSTRANDO LA OPCION SELECCIONADA POR EL USUARIO
+            let player = seleccionUsuario(e)
+            
+
+            //VALIDANDO QUIEN ES EL GANADOR
+            validarGanador(valores, cpu, player)
+
+            //MOSTRANDO LA OPCION SELECCIONADA POR LA CPU
+            seleccionCPU(cpu)
+ 
+        })
+
+        function seleccionUsuario(e) {
+            let player
             if (e.target.classList[0] == "o-piedra") {
                 player = 0
                 imgJugada.setAttribute("src", "./images/icon-rock.svg")
@@ -143,15 +154,12 @@
                 contJugada.style.boxShadow = '0px 0px 2px 10px #f5b05c'
             }
 
-            if (cpu == 0) {
-                contCpu.style.backgroundImage = 'url(./images/icon-rock.svg)'
-            }else if(cpu == 1){
-                contCpu.style.backgroundImage = 'url(./images/icon-paper.svg)'
-            }else{
-                contCpu.style.backgroundImage = 'url(./images/icon-scissors.svg)'
-            }
-            
+            return player
 
+        }
+
+        function validarGanador(valores, cpu, player) {
+            
             if (valores[cpu] == "piedra" && valores[player] == "tijera" ||
                 valores[cpu] == "tijera" && valores[player] == "papel" ||
                 valores[cpu] == "papel" && valores[player] == "piedra")  {
@@ -171,12 +179,18 @@
                 contador++
                 cajaCont.innerHTML = contador
             }
- 
-            console.log("CPU",cpu)
-            console.log("PLAYER",player)
-        })
+        }
 
-               
+        function seleccionCPU(cpu) {
+
+            if (cpu == 0) {
+                contCpu.style.backgroundImage = 'url(./images/icon-rock.svg)'
+            }else if(cpu == 1){
+                contCpu.style.backgroundImage = 'url(./images/icon-paper.svg)'
+            }else{
+                contCpu.style.backgroundImage = 'url(./images/icon-scissors.svg)'
+            }
+        }
     </script>
 </body>
 </html>
